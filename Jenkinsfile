@@ -9,13 +9,9 @@ node {
     }
   }
   stage('Trigger dataproc-test') {
-    steps {
-      build 'dataproc-test'
-    }
+    build 'dataproc-test'
   }
   stage('After dataproc-test') {
-    steps {
-      sh "echo 'Dataproc-test deployed successfully"
-    }
+    sh "echo 'Dataproc-test deployed successfully"
   }
 }
