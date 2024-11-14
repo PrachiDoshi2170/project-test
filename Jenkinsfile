@@ -8,4 +8,13 @@ node {
       sh "${scannerHome}/bin/sonar-scanner"
     }
   }
+  post {
+    success {
+      // Trigger the second pipeline
+      build job: 'Fetch-GCloud-Version-Pipeline'
+    }
+    failure {
+      echo 'Pipeline failed. Skipping downstream job trigger.'
+    }
+  }
 }
