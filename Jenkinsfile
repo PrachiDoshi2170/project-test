@@ -8,13 +8,14 @@ node {
       sh "${scannerHome}/bin/sonar-scanner"
     }
   }
-  post {
-    success {
-      // Trigger the second pipeline
-      build job: 'Fetch-GCloud-Version-Pipeline'
+  stage('Trigger dataproc-test') {
+    steps {
+      build 'dataproc-test'
     }
-    failure {
-      echo 'Pipeline failed. Skipping downstream job trigger.'
+  }
+  stage('After dataproc-test') {
+    steps {
+      sh "echo 'Dataproc-test deployed successfully"
     }
   }
 }
